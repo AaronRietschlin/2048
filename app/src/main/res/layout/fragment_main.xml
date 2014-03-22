@@ -6,116 +6,140 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/game_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:id="@+id/grid_container_1_1"
-            style="@style/Layout.Grid.Container" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:id="@+id/grid_container_1_2"
-            style="@style/Layout.Grid.Container" />
+            <FrameLayout
+                android:layout_marginTop="@dimen/cell_padding_large"
+                android:layout_marginLeft="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_1_1"
+                style="@style/Layout.Cell" />
 
-        <FrameLayout
-            android:id="@+id/grid_container_1_3"
-            style="@style/Layout.Grid.Container" />
+            <FrameLayout
+                android:layout_marginTop="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_1_2"
+                style="@style/Layout.Cell" />
 
-        <FrameLayout
-            android:id="@+id/grid_container_1_4"
-            style="@style/Layout.Grid.Container" />
+            <FrameLayout
+                android:layout_marginTop="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_1_3"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginTop="@dimen/cell_padding_large"
+                android:layout_marginRight="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_1_4"
+                style="@style/Layout.Cell" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_marginLeft="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_2_1"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:id="@+id/grid_container_2_2"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:id="@+id/grid_container_2_3"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginRight="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_2_4"
+                style="@style/Layout.Cell" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_marginLeft="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_3_1"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:id="@+id/grid_container_3_2"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:id="@+id/grid_container_3_3"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginRight="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_3_4"
+                style="@style/Layout.Cell" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_marginLeft="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_4_1"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:id="@+id/grid_container_4_2"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:id="@+id/grid_container_4_3"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginRight="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_4_4"
+                style="@style/Layout.Cell" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_marginLeft="@dimen/cell_padding_large"
+                android:layout_marginBottom="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_5_1"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginBottom="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_5_2"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginBottom="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_5_3"
+                style="@style/Layout.Cell" />
+
+            <FrameLayout
+                android:layout_marginBottom="@dimen/cell_padding_large"
+                android:id="@+id/grid_container_5_4"
+                style="@style/Layout.Cell" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
-            android:id="@+id/grid_container_2_1"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_2_2"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_2_3"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_2_4"
-            style="@style/Layout.Grid.Container" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
-            android:id="@+id/grid_container_3_1"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_3_2"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_3_3"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_3_4"
-            style="@style/Layout.Grid.Container" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
-            android:id="@+id/grid_container_4_1"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_4_2"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_4_3"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_4_4"
-            style="@style/Layout.Grid.Container" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
-            android:id="@+id/grid_container_5_1"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_5_2"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_5_3"
-            style="@style/Layout.Grid.Container" />
-
-        <FrameLayout
-            android:id="@+id/grid_container_5_4"
-            style="@style/Layout.Grid.Container" />
-
-    </LinearLayout>
-
-
 </LinearLayout>

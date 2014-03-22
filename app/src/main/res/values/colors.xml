@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="game_container">#bbada0</color>
     <color name="grid_cell">#EEE4DA</color>
 
     <color name="title_text">#f9f6f2</color>
