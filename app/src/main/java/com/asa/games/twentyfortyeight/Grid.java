@@ -7,7 +7,7 @@ public class Grid {
     private static final String TAG = "Grid";
 
     private int size;
-    private Tile[][] cells;
+    public Tile[][] cells;
 
     public Grid(int size) {
         this.size = size;
@@ -28,6 +28,14 @@ public class Grid {
     public void empty() {
         cells = null;
         cells = new Tile[size][size];
+    }
+
+    private void init() {
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                cells[x][y] = new Tile(x, y, 0);
+            }
+        }
     }
 
     /**
@@ -66,8 +74,8 @@ public class Grid {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 Tile tile = cells[x][y];
-                if (tile != null) {
-                    availableCells.add(tile);
+                if (tile == null) {
+                    availableCells.add(new Tile(x, y, 0));
                 }
             }
         }

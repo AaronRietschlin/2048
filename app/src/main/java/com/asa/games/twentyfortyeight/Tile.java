@@ -10,20 +10,21 @@ public class Tile {
     public int y;
     public int value = DEFAULT_VALUE_2;
 
-    private Tile previousPosition;
+    public Tile previousPosition;
     // Tracks tiles that are merged together
-    private Tile mergedFrom;
+    public Tile mergedFrom;
 
     public Tile() {
     }
 
-    public Tile(int x, int y) {
+    public Tile(int x, int y, int value) {
         this.x = x;
         this.y = y;
+        this.value = value;
     }
 
     public void savePosition() {
-        previousPosition = new Tile(x, y);
+        previousPosition = new Tile(x, y, value);
     }
 
     public void updatePosition(Tile tile) {
