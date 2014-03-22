@@ -7,6 +7,8 @@ import android.util.SparseArray;
  */
 public class GameManager {
 
+    public static final int DEFAULT_SIZE = 4;
+
     public static final int DIRECTION_UP = 0;
     public static final int DIRECTION_RIGHT = 1;
     public static final int DIRECTION_DOWN = 2;
@@ -14,9 +16,9 @@ public class GameManager {
 
     private static final int START_TILE_COUNT = 2;
 
-    private int size;
+    public int size;
     public Grid grid;
-    private int score;
+    public int score;
 
     private boolean won;
     private boolean over;
@@ -34,6 +36,23 @@ public class GameManager {
     // We are mapping the directions to an int array where the 0 position is the x and the 1 position is the y
     private static final int VECTOR_X_POS = 0;
     private static final int VECTOR_Y_POS = 1;
+
+    private static GameManager sInstance;
+
+    private GameManager(int size) {
+        size = size;
+    }
+
+    public static GameManager getInstance(int size) {
+        if (sInstance == null) {
+            sInstance = new GameManager(size);
+        }
+        return sInstance;
+    }
+
+    public static GameManager getInstance() {
+        return getInstance(DEFAULT_SIZE);
+    }
 
     private void setup() {
         // TODO - implement saving/restoring the state.
