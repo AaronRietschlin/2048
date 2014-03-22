@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="grid_cell">#EEE4DA</color>
+
+    <color name="title_text">#f9f6f2</color>
+
+    <!-- Colors of the individual tiles -->
+    <color name="tile_color_2">#eee4da</color>
+    <color name="tile_color_4">#eee4da</color>
+    <color name="tile_color_8">#ede0c8</color>
+    <color name="tile_color_16">#f59563</color>
+    <color name="tile_color_32">#f67c5f</color>
+    <color name="tile_color_64">#f65e3b</color>
+    <color name="tile_color_128">#edcf72</color>
+    <color name="tile_color_256">#edcc61</color>
+    <color name="tile_color_512">#edc850</color>
+    <color name="tile_color_1024">#edc53f</color>
+    <color name="tile_color_2048">#edc22e</color>
+    <color name="tile_color_super">#3c3a32</color>
+
+</resources>
