@@ -1,42 +1,60 @@
 package com.asa.games.twentyfortyeight;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class MainActivity extends FragmentActivity {
 
-    private FragmentManager mFragmentManager;
+    @InjectView(R.id.grid_container_0_1)
+    FrameLayout mGridContainer01;
+    @InjectView(R.id.grid_container_0_2)
+    FrameLayout mGridContainer02;
+    @InjectView(R.id.grid_container_0_3)
+    FrameLayout mGridContainer03;
+    @InjectView(R.id.grid_container_0_4)
+    FrameLayout mGridContainer04;
+    @InjectView(R.id.grid_container_1_1)
+    FrameLayout mGridContainer11;
+    @InjectView(R.id.grid_container_1_2)
+    FrameLayout mGridContainer12;
+    @InjectView(R.id.grid_container_1_3)
+    FrameLayout mGridContainer13;
+    @InjectView(R.id.grid_container_1_4)
+    FrameLayout mGridContainer14;
+    @InjectView(R.id.grid_container_2_1)
+    FrameLayout mGridContainer21;
+    @InjectView(R.id.grid_container_2_2)
+    FrameLayout mGridContainer22;
+    @InjectView(R.id.grid_container_2_3)
+    FrameLayout mGridContainer23;
+    @InjectView(R.id.grid_container_2_4)
+    FrameLayout mGridContainer24;
+    @InjectView(R.id.grid_container_3_1)
+    FrameLayout mGridContainer31;
+    @InjectView(R.id.grid_container_3_2)
+    FrameLayout mGridContainer32;
+    @InjectView(R.id.grid_container_3_3)
+    FrameLayout mGridContainer33;
+    @InjectView(R.id.grid_container_3_4)
+    FrameLayout mGridContainer34;
+
+    private FrameLayout[][] mGrid;
+    private GameManager mGameManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_main);
+        ButterKnife.inject(this);
 
-        mFragmentManager = getSupportFragmentManager();
-
-        if (savedInstanceState == null) {
-            Fragment frag = FragmentMain.newInstance();
-            mFragmentManager.beginTransaction().add(R.id.fragment_container, frag, FragmentMain.TAG)
-                    .commit();
-        } else {
-            // Try to restore the fragmet
-            Fragment frag = mFragmentManager.findFragmentByTag(FragmentMain.TAG);
-            if (frag == null) {
-                // not present so add it.
-                frag = FragmentMain.newInstance();
-                mFragmentManager.beginTransaction().add(R.id.fragment_container, frag, FragmentMain.TAG)
-                        .commit();
-            } else {
-                if (!frag.isAdded()) {
-                    mFragmentManager.beginTransaction().attach(frag).commit();
-                }
-            }
-        }
-
+        setupGame();
     }
 
 
@@ -60,4 +78,31 @@ public class MainActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void setupGame() {
+        mGameManager = GameManager.getInstance(this);
+        setupGridViews();
+        mGameManager.setViews(mGrid);
+        mGameManager.setup();
+    }
+
+    private void setupGridViews() {
+        mGrid = null;
+        mGrid = new FrameLayout[mGameManager.size][mGameManager.size];
+        mGrid[0][0] = mGridContainer01;
+        mGrid[0][1] = mGridContainer02;
+        mGrid[0][2] = mGridContainer03;
+        mGrid[0][3] = mGridContainer04;
+        mGrid[1][0] = mGridContainer11;
+        mGrid[1][1] = mGridContainer12;
+        mGrid[1][2] = mGridContainer13;
+        mGrid[1][3] = mGridContainer14;
+        mGrid[2][0] = mGridContainer21;
+        mGrid[2][1] = mGridContainer22;
+        mGrid[2][2] = mGridContainer23;
+        mGrid[2][3] = mGridContainer24;
+        mGrid[3][0] = mGridContainer31;
+        mGrid[3][1] = mGridContainer32;
+        mGrid[3][2] = mGridContainer33;
+        mGrid[3][3] = mGridContainer34;
+    }
 }
