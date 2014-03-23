@@ -2,14 +2,18 @@ package com.asa.games.twentyfortyeight;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GestureDetectorCompat;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import timber.log.Timber;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements GestureDetector.OnGestureListener {
 
     @InjectView(R.id.grid_container_0_1)
     FrameLayout mGridContainer01;
@@ -47,6 +51,7 @@ public class MainActivity extends FragmentActivity {
     private FrameLayout[][] mGrid;
     private GameManager mGameManager;
 
+    private GestureDetectorCompat mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,23 +59,19 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.fragment_main);
         ButterKnife.inject(this);
 
+        mGestureDetector = new GestureDetectorCompat(this, this);
+
         setupGame();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
@@ -104,5 +105,45 @@ public class MainActivity extends FragmentActivity {
         mGrid[3][1] = mGridContainer32;
         mGrid[3][2] = mGridContainer33;
         mGrid[3][3] = mGridContainer34;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        mGestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        Timber.d("");
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+        Timber.d("");
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        Timber.d("");
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        Timber.d("");
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+        Timber.d("");
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        Timber.d("");
+        return false;
     }
 }
