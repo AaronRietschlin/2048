@@ -1,6 +1,8 @@
 package com.asa.games.twentyfortyeight;
 
+import android.content.Context;
 import android.util.SparseArray;
+import android.widget.FrameLayout;
 
 /**
  * Created by Aaron on 3/22/14.
@@ -17,8 +19,10 @@ public class GameManager {
     private static final int START_TILE_COUNT = 2;
 
     public int size;
-    public Grid grid;
     public int score;
+    private Context context;
+    public Grid grid;
+    public FrameLayout[][] gridViews;
 
     private boolean won;
     private boolean over;
@@ -39,22 +43,27 @@ public class GameManager {
 
     private static GameManager sInstance;
 
-    private GameManager(int size) {
-        size = size;
+    private GameManager(Context context, int size) {
+        this.size = size;
+        this.context = context;
     }
 
-    public static GameManager getInstance(int size) {
+    public static GameManager getInstance(Context context, int size) {
         if (sInstance == null) {
-            sInstance = new GameManager(size);
+            sInstance = new GameManager(context, size);
         }
         return sInstance;
     }
 
-    public static GameManager getInstance() {
-        return getInstance(DEFAULT_SIZE);
+    public static GameManager getInstance(Context context) {
+        return getInstance(context, DEFAULT_SIZE);
     }
 
-    private void setup() {
+    public void setViews(FrameLayout[][] layouts) {
+        gridViews = layouts;
+    }
+
+    public void setup() {
         // TODO - implement saving/restoring the state.
         grid = new Grid(size);
         addStartTiles();
@@ -66,12 +75,27 @@ public class GameManager {
         }
     }
 
+    public void insertTileToView(Tile tile) {
+        if (gridViews == null) {
+            throw new IllegalStateException("To insert a tile, the layout array must not be null.");
+        }
+        FrameLayout layout = gridViews[tile.x][tile.y];
+        if (layout == null) {
+            throw new IllegalStateException("The position for tile (" + tile.toString() + ") is null.");
+        }
+        if (layout.getChildCount() != 0) {
+            layout.removeAllViews();
+        }
+        layout.addView(tile.createTileView(context));
+    }
+
     private void addRandomTile() {
         if (grid.areCellsAvailable()) {
             int value = Math.random() < 0.5 ? Tile.DEFAULT_VALUE_2 : Tile.DEFAULT_VALUE_4;
             Tile tile = grid.getRandomAvailableCell();
             tile.value = value;
             grid.insertTile(tile);
+            insertTileToView(tile);
         }
     }
 

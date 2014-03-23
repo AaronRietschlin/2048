@@ -1,5 +1,7 @@
 package com.asa.games.twentyfortyeight;
 
+import android.content.Context;
+
 public class Tile {
     private static final String TAG = "Tile";
 
@@ -48,4 +50,13 @@ public class Tile {
         return this.value;
     }
 
+    @Override
+    public String toString() {
+        return "Tile position x=" + x + "; y=" + y;
+    }
+
+    public TileView createTileView(Context context) {
+        // TODO - perhaps define the style.
+        return new TileView(context, this);
+    }
 }
