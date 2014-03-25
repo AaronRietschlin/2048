@@ -51,6 +51,45 @@ public class TileView extends TextView {
     public void setTileValue() {
         if (mTile != null) {
             setText(String.valueOf(mTile.value));
+            setBackground();
+        }
+    }
+
+    private void setBackground() {
+        switch (mTile.value) {
+            case 2:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_2));
+                break;
+            case 4:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_4));
+                break;
+            case 8:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_8));
+                break;
+            case 16:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_16));
+                break;
+            case 32:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_32));
+                break;
+            case 64:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_64));
+                break;
+            case 128:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_128));
+                break;
+            case 256:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_256));
+                break;
+            case 512:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_512));
+                break;
+            case 1024:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_1024));
+                break;
+            case 2048:
+                setBackgroundColor(getResources().getColor(R.color.tile_color_2048));
+                break;
         }
     }
 }

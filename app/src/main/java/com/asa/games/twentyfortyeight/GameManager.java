@@ -139,7 +139,7 @@ public class GameManager {
         for (int i = 0; i < size; i++) {
             int x = xTraversal[i];
             for (int j = 0; j < size; j++) {
-                int y = yTraversal[i];
+                int y = yTraversal[j];
                 Tile tile = grid.getTile(x, y);
 
                 if (tile != null) {
