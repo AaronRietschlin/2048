@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.widget.FrameLayout;
 
+import timber.log.Timber;
+
 /**
  * Created by Aaron on 3/22/14.
  */
@@ -31,10 +33,10 @@ public class GameManager {
     private static final SparseArray<int[]> DIRECTION_MAP = new SparseArray<int[]>();
 
     static {
-        DIRECTION_MAP.put(DIRECTION_UP, new int[]{0, -1});
-        DIRECTION_MAP.put(DIRECTION_DOWN, new int[]{0, 1});
-        DIRECTION_MAP.put(DIRECTION_LEFT, new int[]{-1, 0});
-        DIRECTION_MAP.put(DIRECTION_RIGHT, new int[]{1, 0});
+        DIRECTION_MAP.put(DIRECTION_LEFT, new int[]{0, -1});
+        DIRECTION_MAP.put(DIRECTION_RIGHT, new int[]{0, 1});
+        DIRECTION_MAP.put(DIRECTION_UP, new int[]{-1, 0});
+        DIRECTION_MAP.put(DIRECTION_DOWN, new int[]{1, 0});
     }
 
     // We are mapping the directions to an int array where the 0 position is the x and the 1 position is the y
@@ -72,6 +74,9 @@ public class GameManager {
     private void addStartTiles() {
         for (int i = 0; i < START_TILE_COUNT; i++) {
             addRandomTile();
+        }
+        if (BuildConfig.DEBUG) {
+            grid.logGrid();
         }
     }
 
@@ -122,14 +127,49 @@ public class GameManager {
     }
 
     public void move(int direction) {
-        // TODO implement
         if (isGameTerminated()) {
             return;
         }
-
         int[] vector = getVector(direction);
-
         prepareTiles();
+        boolean moved = false;
+
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                Tile tile = grid.getTile(x, y);
+
+                if (tile != null) {
+                    Tile[] positions = findFarthestPosition(tile, vector);
+                    Tile next = positions[1];
+
+                    if (next != null && grid.withinBounds(next) && next.value == tile.value && next.mergedFrom == null) {
+                        Tile mergedTile = new Tile(next, tile.value * 2);
+                        grid.insertTile(mergedTile);
+                        grid.removeTile(tile);
+                        tile.updatePosition(next);
+                        score += mergedTile.value;
+                        // TODO if the high score, end
+                        if (mergedTile.value == 2048) {
+                            won = true;
+                        } else {
+                            moveTile(tile, positions[0]);
+                        }
+
+                        moved = !positionsEqual(x, y, tile.x, tile.y);
+                    }
+                }
+            }
+
+        }
+        if(moved){
+            addRandomTile();
+            if(!movesAvailable()){
+                over = true;
+            }
+            grid.logGrid();
+        }else{
+            Timber.d("Did not move.");
+        }
     }
 
     private int[] getVector(int direction) {
@@ -185,10 +225,20 @@ public class GameManager {
      */
     public Tile[] findFarthestPosition(Tile tile, int[] vector) {
         Tile previous = null;
-        while (grid.withinBounds(tile) && grid.isCellAvailable(tile)) {
+        boolean withinBounds = grid.withinBounds(tile);
+        boolean available = grid.isCellAvailable(tile);
+        do{
             previous = tile;
             tile = new Tile(tile.x + vector[VECTOR_X_POS], tile.y + vector[VECTOR_Y_POS], tile.value);
-        }
+        }while (grid.withinBounds(tile) && grid.isCellAvailable(tile));
         return new Tile[]{previous, tile};
+    }
+
+    private boolean positionsEqual(int x1, int y1, int x2, int y2) {
+        return x1 == x2 && y1 == y2;
+    }
+
+    private boolean positionsEqual(Tile tile1, Tile tile2) {
+        return positionsEqual(tile1.x, tile1.y, tile2.x, tile2.y);
     }
 }

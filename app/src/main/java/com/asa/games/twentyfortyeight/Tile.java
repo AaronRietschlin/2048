@@ -24,6 +24,11 @@ public class Tile {
         this.y = y;
         this.value = value;
     }
+    public Tile(Tile tile, int value) {
+        this.x = tile.x;
+        this.y = tile.y;
+        this.value = value;
+    }
 
     public void savePosition() {
         previousPosition = new Tile(x, y, value);

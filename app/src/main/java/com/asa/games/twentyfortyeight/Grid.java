@@ -3,6 +3,8 @@ package com.asa.games.twentyfortyeight;
 import java.util.ArrayList;
 import java.util.Random;
 
+import timber.log.Timber;
+
 public class Grid {
     private static final String TAG = "Grid";
 
@@ -12,6 +14,7 @@ public class Grid {
     public Grid(int size) {
         this.size = size;
         cells = new Tile[size][size];
+        Timber.tag(TAG);
     }
 
     public Grid(Grid previous) {
@@ -19,6 +22,7 @@ public class Grid {
             throw new IllegalStateException("Cannot create a grid from a null grid.");
         }
         this.size = previous.size;
+        Timber.tag(TAG);
         fromState(previous.cells);
     }
 
@@ -151,5 +155,25 @@ public class Grid {
                 y >= 0 && y < size;
     }
 
+
+    public void logGrid(){
+        String row = "";
+        for(int x = 0; x < size; x++){
+            row += "[";
+            for(int y = 0; y < size; y++){
+                if(y > 0){
+                    row+=", ";
+                }
+                Tile tile = cells[x][y];
+                if(tile != null){
+                    row += tile.value;
+                }else{
+                    row += "x";
+                }
+            }
+            row += "]\n";
+        }
+        Timber.d("Grid:\n%s\n", row);
+    }
 
 }
