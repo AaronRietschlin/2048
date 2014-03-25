@@ -131,11 +131,15 @@ public class GameManager {
             return;
         }
         int[] vector = getVector(direction);
+        int[] xTraversal = buildXTraversal(vector);
+        int[] yTraversal = buildYTraversal(vector);
         prepareTiles();
         boolean moved = false;
 
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
+        for (int i = 0; i < size; i++) {
+            int x = xTraversal[i];
+            for (int j = 0; j < size; j++) {
+                int y = yTraversal[i];
                 Tile tile = grid.getTile(x, y);
 
                 if (tile != null) {
@@ -190,6 +194,37 @@ public class GameManager {
                 }
             }
         }
+    }
+
+    private int[] buildXTraversal(int[] vector){
+        int[] xTraversal = new int[size];
+        for(int i = 0; i < size; i++){
+            xTraversal[i] = i;
+        }
+        if(vector[VECTOR_X_POS] == 1){
+            reverseArray(xTraversal);
+        }
+        return xTraversal;
+    }
+
+    private int[] buildYTraversal(int[] vector){
+        int[] yTraversal = new int[size];
+        for(int i = 0; i < size; i++){
+            yTraversal[i] = i;
+        }
+        if(vector[VECTOR_Y_POS] == 1){
+            reverseArray(yTraversal);
+        }
+        return yTraversal;
+    }
+
+    private int[] reverseArray(int[] array){
+        for(int i = 0; i < array.length / 2; i++){
+            int temp = array[i];
+            array[i] = array[array.length -i - 1];
+            array[array.length - i -1] = temp;
+        }
+        return array;
     }
 
     private int[] getVector(int direction) {
