@@ -151,24 +151,44 @@ public class GameManager {
                         // TODO if the high score, end
                         if (mergedTile.value == 2048) {
                             won = true;
-                        } else {
-                            moveTile(tile, positions[0]);
                         }
-
-                        moved = !positionsEqual(x, y, tile.x, tile.y);
+                    } else {
+                        moveTile(tile, positions[0]);
+                    }
+                    if (!positionsEqual(x, y, tile.x, tile.y)) {
+                        moved = true;
                     }
                 }
             }
-
         }
-        if(moved){
+        if (moved) {
             addRandomTile();
-            if(!movesAvailable()){
+            if (!movesAvailable()) {
                 over = true;
             }
+            reAddViews();
             grid.logGrid();
-        }else{
+        } else {
             Timber.d("Did not move.");
+        }
+    }
+
+    private void reAddViews() {
+        if (BuildConfig.DEBUG) {
+            // First, remove all views
+            for (int x = 0; x < size; x++) {
+                for (int y = 0; y < size; y++) {
+                    gridViews[x][y].removeAllViews();
+                }
+            }
+            for (int x = 0; x < size; x++) {
+                for (int y = 0; y < size; y++) {
+                    Tile tile = grid.getTile(x, y);
+                    if (tile != null) {
+                        gridViews[x][y].addView(tile.createTileView(context));
+                    }
+                }
+            }
         }
     }
 
@@ -227,10 +247,13 @@ public class GameManager {
         Tile previous = null;
         boolean withinBounds = grid.withinBounds(tile);
         boolean available = grid.isCellAvailable(tile);
-        do{
+        do {
             previous = tile;
-            tile = new Tile(tile.x + vector[VECTOR_X_POS], tile.y + vector[VECTOR_Y_POS], tile.value);
-        }while (grid.withinBounds(tile) && grid.isCellAvailable(tile));
+            tile = grid.getTile(tile.x + vector[VECTOR_X_POS], tile.y + vector[VECTOR_Y_POS]);
+            if (tile == null) {
+                tile = new Tile(previous.x + vector[VECTOR_X_POS], previous.y + vector[VECTOR_Y_POS], previous.value);
+            }
+        } while (grid.withinBounds(tile) && grid.isCellAvailable(tile));
         return new Tile[]{previous, tile};
     }
 

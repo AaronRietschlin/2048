@@ -64,7 +64,7 @@ public class Grid {
         int availableTileSize = tiles.size();
         if (availableTileSize > 0) {
             Random rand = new Random();
-            int randNum = rand.nextInt(availableTileSize + 1);
+            int randNum = rand.nextInt(availableTileSize);
             return tiles.get(randNum);
         }
         return null;
