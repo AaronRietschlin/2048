@@ -23,5 +23,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:4.0.1'
     compile 'com.jakewharton.timber:timber:2.2.2'
     compile 'com.squareup:otto:1.3.4'
+    compile 'info.metadude.android:typed-preferences:1.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

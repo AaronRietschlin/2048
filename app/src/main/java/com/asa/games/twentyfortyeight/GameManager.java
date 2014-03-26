@@ -68,10 +68,10 @@ public class GameManager {
     public void setup() {
         // TODO - implement saving/restoring the state.
         grid = new Grid(size);
-//        addStartTiles();
-        placeTile(1, 1, 32);
-        placeTile(2, 1, 16);
-        placeTile(3, 1, 16);
+        addStartTiles();
+//        placeTile(1, 1, 32);
+//        placeTile(2, 1, 16);
+//        placeTile(3, 1, 16);
     }
 
     private void addStartTiles() {

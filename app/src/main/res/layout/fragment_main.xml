@@ -32,7 +32,8 @@
                 android:id="@+id/tv_score"
                 style="@style/Text.Score"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="0" />
 
         </LinearLayout>
 
@@ -55,7 +56,8 @@
                 android:id="@+id/tv_score_best"
                 style="@style/Text.Score"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="0" />
 
         </LinearLayout>
 

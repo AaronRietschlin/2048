@@ -28,7 +28,7 @@
     </style>
 
     <style name="Text.Score.Title">
-        <item name="android:textColor">@color/grid_cell</item>
+        <item name="android:textColor">@color/tile_color_2</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">@dimen/score_title_text_size</item>

@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
         mGestureDetector = new GestureDetectorCompat(this, this);
 
         setupGame();
+        setupHighScore();
     }
 
     @Override
@@ -98,9 +99,10 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
     }
 
     @Subscribe
-    public void onScoreChanged(ScoreChangeEvent event){
-        if(event != null){
+    public void onScoreChanged(ScoreChangeEvent event) {
+        if (event != null) {
             mTvScore.setText(String.valueOf(event.getScore()));
+            checkForBestScore(event.getScore());
         }
     }
 
@@ -130,6 +132,20 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
         mGrid[3][1] = mGridContainer32;
         mGrid[3][2] = mGridContainer33;
         mGrid[3][3] = mGridContainer34;
+    }
+
+    private void checkForBestScore(int score) {
+        int savedScore = PreferenceUtils.getHighScore(this);
+        if (score > savedScore) {
+            // NEW HIGH SCORE!
+            mTvScoreBest.setText(String.valueOf(score));
+            PreferenceUtils.setHighScore(this, score);
+        }
+    }
+
+    private void setupHighScore() {
+        int highScore = PreferenceUtils.getHighScore(this);
+        mTvScoreBest.setText(String.valueOf(highScore));
     }
 
     @Override
