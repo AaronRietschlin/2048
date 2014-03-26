@@ -1,14 +1,21 @@
 package com.asa.games.twentyfortyeight;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import timber.log.Timber;
+
 public class TileView extends TextView {
+    private static final String TAG = "TileView";
 
     private Tile mTile;
+
+    private Context mContext;
 
     public TileView(Context context) {
         super(context);
@@ -33,11 +40,16 @@ public class TileView extends TextView {
     }
 
     private void init(Context context) {
-        int height = context.getResources().getDimensionPixelSize(R.dimen.grid_container_cell_height);
-        int width = context.getResources().getDimensionPixelSize(R.dimen.grid_container_cell_width);
+        mContext = context;
+        Timber.tag(TAG);
+        int height = mContext.getResources().getDimensionPixelSize(R.dimen.grid_container_cell_height);
+        int width = mContext.getResources().getDimensionPixelSize(R.dimen.grid_container_cell_width);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
         setLayoutParams(params);
         setGravity(Gravity.CENTER);
+        setTextColor(Color.WHITE);
+        setTypeface(null, Typeface.BOLD);
+        setTextSize();
     }
 
     public void setTile(Tile tile) {
@@ -52,7 +64,19 @@ public class TileView extends TextView {
         if (mTile != null) {
             setText(String.valueOf(mTile.value));
             setBackground();
+            setTextSize();
         }
+    }
+
+    private void setTextSize() {
+        int resId = R.dimen.cell_text_size_double_digit;
+        if (mTile != null && mTile.value > 100 && mTile.value < 1000) {
+            resId = R.dimen.cell_text_size_triple_digit;
+        } else if (mTile != null && resId > 1000) {
+            resId = R.dimen.cell_text_size_four_digit;
+        }
+        float textSize = mContext.getResources().getDimension(resId);
+        setTextSize(textSize);
     }
 
     private void setBackground() {

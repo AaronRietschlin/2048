@@ -68,7 +68,10 @@ public class GameManager {
     public void setup() {
         // TODO - implement saving/restoring the state.
         grid = new Grid(size);
-        addStartTiles();
+//        addStartTiles();
+        placeTile(1, 1, 32);
+        placeTile(2, 1, 16);
+        placeTile(3, 1, 16);
     }
 
     private void addStartTiles() {
@@ -148,6 +151,7 @@ public class GameManager {
 
                     if (next != null && grid.withinBounds(next) && next.value == tile.value && next.mergedFrom == null) {
                         Tile mergedTile = new Tile(next, tile.value * 2);
+                        mergedTile.mergedFrom = next;
                         grid.insertTile(mergedTile);
                         grid.removeTile(tile);
                         tile.updatePosition(next);
@@ -298,5 +302,13 @@ public class GameManager {
 
     private boolean positionsEqual(Tile tile1, Tile tile2) {
         return positionsEqual(tile1.x, tile1.y, tile2.x, tile2.y);
+    }
+
+    public void placeTile(int x, int y, int value){
+        if(!BuildConfig.DEBUG){
+            return;
+        }
+        grid.insertTile(new Tile(x, y, value));
+        reAddViews();
     }
 }

@@ -8,5 +8,8 @@
     <dimen name="grid_container_cell_height">60dp</dimen>
     <dimen name="cell_padding">4dp</dimen>
     <dimen name="cell_padding_large">8dp</dimen>
+    <dimen name="cell_text_size_double_digit">16sp</dimen>
+    <dimen name="cell_text_size_triple_digit">10sp</dimen>
+    <dimen name="cell_text_size_four_digit">8sp</dimen>
 
 </resources>
