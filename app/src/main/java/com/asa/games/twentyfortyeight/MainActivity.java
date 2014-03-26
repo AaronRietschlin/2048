@@ -67,6 +67,7 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.fragment_main);
         ButterKnife.inject(this);
         BusProvider.register(this);
