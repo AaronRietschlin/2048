@@ -19,5 +19,20 @@
         <item name="android:layout_height">@dimen/grid_container_cell_height</item>
     </style>
 
+    <style name="Text" />
+
+    <style name="Text.Score">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/score_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Score.Title">
+        <item name="android:textColor">@color/grid_cell</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/score_title_text_size</item>
+    </style>
+
 
 </resources>

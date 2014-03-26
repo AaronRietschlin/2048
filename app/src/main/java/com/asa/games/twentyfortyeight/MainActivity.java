@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import com.squareup.otto.Subscribe;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -47,6 +50,10 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
     FrameLayout mGridContainer33;
     @InjectView(R.id.grid_container_3_4)
     FrameLayout mGridContainer34;
+    @InjectView(R.id.tv_score)
+    TextView mTvScore;
+    @InjectView(R.id.tv_score_best)
+    TextView mTvScoreBest;
 
     private FrameLayout[][] mGrid;
     private GameManager mGameManager;
@@ -62,6 +69,7 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
         ButterKnife.inject(this);
+        BusProvider.register(this);
 
         mGestureDetector = new GestureDetectorCompat(this, this);
 
@@ -81,6 +89,19 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BusProvider.unregister(this);
+    }
+
+    @Subscribe
+    public void onScoreChanged(ScoreChangeEvent event){
+        if(event != null){
+            mTvScore.setText(String.valueOf(event.getScore()));
+        }
     }
 
     private void setupGame() {

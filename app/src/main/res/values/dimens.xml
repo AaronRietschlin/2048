@@ -12,4 +12,9 @@
     <dimen name="cell_text_size_triple_digit">10sp</dimen>
     <dimen name="cell_text_size_four_digit">8sp</dimen>
 
+    <!-- The score counters -->
+    <dimen name="score_title_text_size">16sp</dimen>
+    <dimen name="score_text_size">22sp</dimen>
+    <dimen name="score_layout_width">80dp</dimen>
+
 </resources>

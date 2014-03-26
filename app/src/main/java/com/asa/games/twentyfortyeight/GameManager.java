@@ -176,6 +176,7 @@ public class GameManager {
             }
             reAddViews();
             grid.logGrid();
+            BusProvider.post(new ScoreChangeEvent(score));
         } else {
             Timber.d("Did not move.");
         }
@@ -200,33 +201,33 @@ public class GameManager {
         }
     }
 
-    private int[] buildXTraversal(int[] vector){
+    private int[] buildXTraversal(int[] vector) {
         int[] xTraversal = new int[size];
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             xTraversal[i] = i;
         }
-        if(vector[VECTOR_X_POS] == 1){
+        if (vector[VECTOR_X_POS] == 1) {
             reverseArray(xTraversal);
         }
         return xTraversal;
     }
 
-    private int[] buildYTraversal(int[] vector){
+    private int[] buildYTraversal(int[] vector) {
         int[] yTraversal = new int[size];
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             yTraversal[i] = i;
         }
-        if(vector[VECTOR_Y_POS] == 1){
+        if (vector[VECTOR_Y_POS] == 1) {
             reverseArray(yTraversal);
         }
         return yTraversal;
     }
 
-    private int[] reverseArray(int[] array){
-        for(int i = 0; i < array.length / 2; i++){
+    private int[] reverseArray(int[] array) {
+        for (int i = 0; i < array.length / 2; i++) {
             int temp = array[i];
-            array[i] = array[array.length -i - 1];
-            array[array.length - i -1] = temp;
+            array[i] = array[array.length - i - 1];
+            array[array.length - i - 1] = temp;
         }
         return array;
     }
@@ -304,8 +305,8 @@ public class GameManager {
         return positionsEqual(tile1.x, tile1.y, tile2.x, tile2.y);
     }
 
-    public void placeTile(int x, int y, int value){
-        if(!BuildConfig.DEBUG){
+    public void placeTile(int x, int y, int value) {
+        if (!BuildConfig.DEBUG) {
             return;
         }
         grid.insertTile(new Tile(x, y, value));
