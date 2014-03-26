@@ -19,8 +19,8 @@ gen/
 
 # Local configuration file (sdk path, etc)
 // TODO - UNCOMMENT THESE IMMEDIATELY
-#local.properties
-#keystore.properties
+local.properties
+keystore.properties
 
 # Eclipse project files
 .classpath
