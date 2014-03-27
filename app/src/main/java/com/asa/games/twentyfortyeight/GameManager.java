@@ -74,6 +74,19 @@ public class GameManager {
 //        placeTile(3, 1, 16);
     }
 
+    public void restart() {
+        won = false;
+        over = false;
+        grid = null;
+        // Now remove all views
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                gridViews[x][y].removeAllViews();
+            }
+        }
+        setup();
+    }
+
     private void addStartTiles() {
         for (int i = 0; i < START_TILE_COUNT; i++) {
             addRandomTile();

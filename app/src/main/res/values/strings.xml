@@ -5,7 +5,18 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Buttons -->
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+
+    <!-- Titles for the info up top -->
     <string name="score">Score</string>
     <string name="best">Best</string>
+    <string name="swipes">Swipes</string>
+
+    <!-- Restarting -->
+    <string name="restart">Restart</string>
+    <string name="restart_game_title">Restart Game</string>
+    <string name="restart_game_message">Are you sure you want to restart the game?</string>
 
 </resources>

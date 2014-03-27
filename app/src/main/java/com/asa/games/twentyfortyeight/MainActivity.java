@@ -7,6 +7,7 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -14,9 +15,13 @@ import com.squareup.otto.Subscribe;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
+import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 import timber.log.Timber;
 
-public class MainActivity extends FragmentActivity implements GestureDetector.OnGestureListener {
+public class MainActivity extends FragmentActivity implements GestureDetector.OnGestureListener,
+        ISimpleDialogListener {
 
     @InjectView(R.id.grid_container_0_1)
     FrameLayout mGridContainer01;
@@ -54,6 +59,10 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
     TextView mTvScore;
     @InjectView(R.id.tv_score_best)
     TextView mTvScoreBest;
+    @InjectView(R.id.tv_swipes)
+    TextView mTvSwipes;
+    @InjectView(R.id.tv_restart)
+    TextView mTvRestart;
 
     private FrameLayout[][] mGrid;
     private GameManager mGameManager;
@@ -63,6 +72,8 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
     private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+    private int mSwipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +87,7 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
 
         setupGame();
         setupHighScore();
+        updateSwipes();
     }
 
     @Override
@@ -183,6 +195,23 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
         Timber.d("");
     }
 
+    private void updateSwipes() {
+        mTvSwipes.setText(String.valueOf(mSwipes));
+        if (mSwipes > 0 && mTvRestart.getVisibility() == View.GONE) {
+            mTvRestart.setVisibility(View.VISIBLE);
+        } else if (mSwipes == 0 && mTvRestart.getVisibility() == View.VISIBLE) {
+            mTvRestart.setVisibility(View.GONE);
+        }
+    }
+
+    @OnClick(R.id.tv_restart)
+    public void onRestartClicked() {
+        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                .setMessage(R.string.restart_game_message).setTitle(R.string.restart_game_title)
+                .setPositiveButtonText(R.string.button_yes).setNegativeButtonText(R.string.button_no)
+                .show();
+    }
+
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         // right to left swipe
@@ -201,6 +230,8 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
                 && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
             onDownSwipe();
         }
+        mSwipes++;
+        updateSwipes();
         return true;
     }
 
@@ -218,5 +249,15 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
 
     private void onDownSwipe() {
         mGameManager.move(GameManager.DIRECTION_DOWN);
+    }
+
+    @Override
+    public void onPositiveButtonClicked(int i) {
+        mGameManager.restart();
+    }
+
+    @Override
+    public void onNegativeButtonClicked(int i) {
+
     }
 }

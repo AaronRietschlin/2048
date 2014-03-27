@@ -3,6 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:listChoiceBackgroundIndicator">@drawable/asa_game_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/asa_game_activated_background_holo_light</item>
     </style>
 
     <style name="Layout" />

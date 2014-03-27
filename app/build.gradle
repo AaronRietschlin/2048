@@ -38,6 +38,7 @@ dependencies {
     compile 'com.jakewharton.timber:timber:2.2.2'
     compile 'com.squareup:otto:1.3.4'
     compile 'info.metadude.android:typed-preferences:1.1.0'
+    compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.crashlytics.android:crashlytics:1.+'
 
