@@ -69,15 +69,13 @@ public class GameManager {
         // TODO - implement saving/restoring the state.
         grid = new Grid(size);
         addStartTiles();
-//        placeTile(1, 1, 32);
-//        placeTile(2, 1, 16);
-//        placeTile(3, 1, 16);
     }
 
     public void restart() {
         won = false;
         over = false;
         grid = null;
+        score = 0;
         // Now remove all views
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
@@ -85,6 +83,7 @@ public class GameManager {
             }
         }
         setup();
+        postScore();
     }
 
     private void addStartTiles() {
@@ -189,10 +188,14 @@ public class GameManager {
             }
             reAddViews();
             grid.logGrid();
-            BusProvider.post(new ScoreChangeEvent(score));
+            postScore();
         } else {
             Timber.d("Did not move.");
         }
+    }
+
+    private void postScore() {
+        BusProvider.post(new ScoreChangeEvent(score));
     }
 
     private void reAddViews() {

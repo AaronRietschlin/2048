@@ -254,6 +254,8 @@ public class MainActivity extends FragmentActivity implements GestureDetector.On
     @Override
     public void onPositiveButtonClicked(int i) {
         mGameManager.restart();
+        mSwipes = 0;
+        updateSwipes();
     }
 
     @Override
